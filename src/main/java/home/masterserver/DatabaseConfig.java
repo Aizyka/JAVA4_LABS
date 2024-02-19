@@ -11,13 +11,16 @@ public class DatabaseConfig {
     static {
         try (FileInputStream input = new FileInputStream(new File("database.properties"))) {
             if (input == null) {
-                Log.Message("Cant open database.properties");
+                Log.message("Cant open database.properties");
                 System.exit(1);
             }
             properties.load(input);
         } catch (IOException e) {
-            Log.Message(e.getMessage());
+            Log.message(e.getMessage());
         }
+    }
+    private DatabaseConfig() {
+        throw new IllegalStateException("Utility class");
     }
 
     public static String getDbUrl() {

@@ -13,7 +13,7 @@ public class Database {
                 result = statement.executeQuery(query);
             }
             catch (SQLException e) {
-                Log.Message(e.getMessage());
+                Log.message(e.getMessage());
             }
         }
 
@@ -27,11 +27,16 @@ public class Database {
                 statement.close();
             }
             catch (SQLException e) {
-                Log.Message(e.getMessage());
+                Log.message(e.getMessage());
             }
         }
     }
     static Connection connection;
+
+    private Database() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static void connect() throws SQLException {
 
         try {
@@ -42,7 +47,7 @@ public class Database {
             connection = DriverManager.getConnection(jdbcUrl, user, password);
 
         } catch (SQLException  e) {
-            Log.Message(e.getMessage());
+            Log.message(e.getMessage());
         }
     }
 }
