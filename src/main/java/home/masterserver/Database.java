@@ -4,7 +4,7 @@ import java.sql.*;
 public class Database {
     public static class Query {
         private Statement statement;
-        public ResultSet result;
+        private ResultSet result;
 
         public Query(String query)
         {
@@ -13,17 +13,21 @@ public class Database {
                 result = statement.executeQuery(query);
             }
             catch (SQLException e) {
-                System.err.println(e.getMessage());
+                Log.Message(e.getMessage());
             }
         }
 
-        public void Close() {
+        public ResultSet getResult() {
+            return result;
+        }
+
+        public void close() {
             try {
                 result.close();
                 statement.close();
             }
             catch (SQLException e) {
-                System.err.println(e.getMessage());
+                Log.Message(e.getMessage());
             }
         }
     }
@@ -38,7 +42,7 @@ public class Database {
             connection = DriverManager.getConnection(jdbcUrl, user, password);
 
         } catch (SQLException  e) {
-            System.err.println(e.getMessage());
+            Log.Message(e.getMessage());
         }
     }
 }

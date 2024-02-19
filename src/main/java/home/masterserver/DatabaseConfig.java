@@ -11,12 +11,12 @@ public class DatabaseConfig {
     static {
         try (FileInputStream input = new FileInputStream(new File("database.properties"))) {
             if (input == null) {
-                System.out.println("Cant open database.properties");
+                Log.Message("Cant open database.properties");
                 System.exit(1);
             }
             properties.load(input);
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.Message(e.getMessage());
         }
     }
 

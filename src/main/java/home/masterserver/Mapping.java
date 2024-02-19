@@ -3,23 +3,24 @@ package home.masterserver;
 import org.json.JSONObject;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLException;
 @RestController
 @EnableAutoConfiguration
 public class Mapping {
-    @RequestMapping("/getUsersCount")
+    @RequestMapping(path = "/getUsersCount", method = RequestMethod.GET)
     String getUsersCount()
     {
         JSONObject json = new JSONObject();
         Database.Query query = new Database.Query("SELECT COUNT(*) FROM public.\"Accounts\"");
         int count = 0;
         try {
-            while(query.result.next()) {
-                count = query.result.getInt(1);
+            while(query.getResult().next()) {
+                count = query.getResult().getInt(1);
             }
-            query.Close();
+            query.close();
             json.put("code", "CS_0");
             json.put("count", count);
         }
