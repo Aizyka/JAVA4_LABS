@@ -22,7 +22,8 @@ The project is structured as follows:
 
 - **Spring Boot:** For building the application.
 - **PostgreSQL JDBC:** For using database operations.
-- **Spring Web:** For building RESTful APIs..
+- **Spring Web:** For building RESTful APIs.
+- **JSON.org:** For serializing/desirializing JSON objects.
 
 ## How to Run the Project
 
