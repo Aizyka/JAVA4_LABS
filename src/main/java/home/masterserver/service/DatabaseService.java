@@ -37,7 +37,6 @@ public class DatabaseService {
     }
 
     public static JSONObject getFetched(boolean authorized) {
-        JSONObject json = new JSONObject();
         Database.Query query;
         if(authorized)
             query = new Database.Query("SELECT COUNT(*) FROM public.\"Accounts\" WHERE email_secret LIKE ''");
