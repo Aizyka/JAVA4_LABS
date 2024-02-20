@@ -1,4 +1,4 @@
-package home.masterserver;
+package home.masterserver.other;
 import java.util.logging.Logger;
 public class Log {
     static Logger logger;

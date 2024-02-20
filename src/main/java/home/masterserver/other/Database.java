@@ -1,5 +1,7 @@
-package home.masterserver;
+package home.masterserver.other;
 import java.sql.*;
+
+import home.masterserver.config.DatabaseConfig;
 
 public class Database {
     public static class Query {

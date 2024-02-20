@@ -1,17 +1,19 @@
-package home.masterserver;
+package home.masterserver.service;
 
 import org.json.JSONObject;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
-@RestController
-@EnableAutoConfiguration
-public class Mapping {
-    @GetMapping(path = "/getUsersCount")
-    String getUsersCount()
-    {
+
+import home.masterserver.other.Database;
+
+@Service
+public class DatabaseService {
+
+    private DatabaseService() {
+        throw new IllegalStateException("Utility class");
+    }
+    public static JSONObject getUsersCount() {
         JSONObject json = new JSONObject();
         Database.Query query = new Database.Query("SELECT COUNT(*) FROM public.\"Accounts\"");
         int count = 0;
@@ -27,6 +29,6 @@ public class Mapping {
             json.put("code", "CS_201");
             json.put("description", e.getMessage());
         }
-        return json.toString();
+        return json;
     }
 }

@@ -1,9 +1,11 @@
-package home.masterserver;
+package home.masterserver.config;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.FileInputStream;
 import java.util.Properties;
+
+import home.masterserver.other.Log;
 
 public class DatabaseConfig {
     private static final Properties properties = new Properties();
