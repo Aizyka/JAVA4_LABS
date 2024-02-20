@@ -2,6 +2,7 @@ package home.masterserver.controller;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import home.masterserver.service.DatabaseService;
@@ -12,5 +13,11 @@ public class AccountsController {
     String getUsersCount()
     {
         return DatabaseService.getUsersCount().toString();
+    }
+
+    @GetMapping(path = "/getFetchedUsers")
+    String getUsersCount(@RequestParam("authorized") boolean authorized)
+    {
+        return DatabaseService.getFetched(authorized).toString();
     }
 }

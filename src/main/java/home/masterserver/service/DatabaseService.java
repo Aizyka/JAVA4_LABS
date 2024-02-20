@@ -9,13 +9,12 @@ import home.masterserver.other.Database;
 
 @Service
 public class DatabaseService {
-
     private DatabaseService() {
         throw new IllegalStateException("Utility class");
     }
-    public static JSONObject getUsersCount() {
+
+    static JSONObject getCount(Database.Query query) {
         JSONObject json = new JSONObject();
-        Database.Query query = new Database.Query("SELECT COUNT(*) FROM public.\"Accounts\"");
         int count = 0;
         try {
             while(query.getResult().next()) {
@@ -30,5 +29,20 @@ public class DatabaseService {
             json.put("description", e.getMessage());
         }
         return json;
+    }
+
+    public static JSONObject getUsersCount() {
+        Database.Query query = new Database.Query("SELECT COUNT(*) FROM public.\"Accounts\"");
+        return getCount(query);
+    }
+
+    public static JSONObject getFetched(boolean authorized) {
+        JSONObject json = new JSONObject();
+        Database.Query query;
+        if(authorized)
+            query = new Database.Query("SELECT COUNT(*) FROM public.\"Accounts\" WHERE email_secret LIKE ''");
+        else
+            query = new Database.Query("SELECT COUNT(*) FROM public.\"Accounts\" WHERE email_secret NOT LIKE ''");
+        return getCount(query);
     }
 }
