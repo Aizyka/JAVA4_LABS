@@ -1,9 +1,10 @@
 package home.masterserver.service;
 
-import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.Map;
+import java.util.HashMap;
 
 import home.masterserver.other.Database;
 
@@ -13,8 +14,8 @@ public class DatabaseService {
         throw new IllegalStateException("Utility class");
     }
 
-    static JSONObject getCount(Database.Query query) {
-        JSONObject json = new JSONObject();
+    static Map<String, Object> getCount(Database.Query query) {
+        Map<String, Object> json = new HashMap<>();
         int count = 0;
         try {
             while(query.getResult().next()) {
@@ -31,12 +32,12 @@ public class DatabaseService {
         return json;
     }
 
-    public static JSONObject getUsersCount() {
+    public static Map<String, Object> getUsersCount() {
         Database.Query query = new Database.Query("SELECT COUNT(*) FROM public.\"Accounts\"");
         return getCount(query);
     }
 
-    public static JSONObject getFetched(boolean authorized) {
+    public static Map<String, Object> getFetched(boolean authorized) {
         Database.Query query;
         if(authorized)
             query = new Database.Query("SELECT COUNT(*) FROM public.\"Accounts\" WHERE email_secret LIKE ''");
