@@ -25,10 +25,10 @@ public class UserService {
         return userProfileRepository.findBySecret(secret);
     }
     public Platform getPlatform(String platform) {
-        return platformRepository.findByPlatform(platform);
+        return platformRepository.findByName(platform);
     }
     public Region getRegion(String region) {
-        return regionRepository.findByRegion(region);
+        return regionRepository.findByName(region);
     }
 
     public boolean existsUser(String login) {
@@ -41,9 +41,9 @@ public class UserService {
         return userProfileRepository.existsBySecret(secret);
     }
     public boolean existsPlatform(String platform) {
-        return platformRepository.existsByPlatform(platform);
+        return platformRepository.existsByName(platform);
     }
-    public boolean existsRegion(String region) { return regionRepository.existsByRegion(region); }
+    public boolean existsRegion(String region) { return regionRepository.existsByName(region); }
 
     public void save(User user) {
         userRepository.save(user);
