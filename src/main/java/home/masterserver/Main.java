@@ -1,12 +1,11 @@
 package home.masterserver;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import home.masterserver.other.Database;
-import home.masterserver.controller.AccountsController;
+@SpringBootApplication
 public class Main {
-    public static void main(String[] args) throws Exception {
-        Database.connect();
-        SpringApplication.run(AccountsController.class, args);
+    public static void main(String[] args) {
+        SpringApplication.run(Main.class, args);
     }
 }
