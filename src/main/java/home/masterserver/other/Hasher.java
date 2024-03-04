@@ -7,6 +7,10 @@ import java.security.SecureRandom;
 
 public class Hasher {
     private static final int SALT_LENGTH = 16;
+
+    private Hasher() {
+        throw new IllegalStateException("Utility class");
+    }
     public static String hashPassword(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -23,7 +27,7 @@ public class Hasher {
 
             return hexString.toString();
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Error hashing password.", e);
+            throw new IllegalStateException("Error hashing password.", e);
         }
     }
 
@@ -36,7 +40,7 @@ public class Hasher {
 
             return bytesToHex(hashedBytes);
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Error generating random hash.", e);
+            throw new IllegalStateException("Error hashing password.", e);
         }
     }
 

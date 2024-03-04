@@ -1,7 +1,6 @@
 package home.masterserver.controller;
 
 import home.masterserver.model.UserProfile;
-import home.masterserver.other.Log;
 import home.masterserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
