@@ -21,7 +21,7 @@ public class UserProfileController {
     public ResponseEntity<UserProfile> get(@RequestParam("secret") String secret) {
         if(!userService.existUserProfile(secret))
         {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return new ResponseEntity<>(userService.getUserProfile(secret), HttpStatus.OK);
     }
@@ -29,11 +29,11 @@ public class UserProfileController {
     public ResponseEntity<UserProfile> updateName(@RequestParam("secret") String secret, @RequestParam("newName") String newName) {
         if(!userService.existUserProfile(secret))
         {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         UserProfile userProfile = userService.getUserProfile(secret);
         userProfile.setName(newName);
         userService.save(userProfile);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(userProfile, HttpStatus.OK);
     }
 }

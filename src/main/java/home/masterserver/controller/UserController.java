@@ -1,7 +1,5 @@
 package home.masterserver.controller;
 
-import home.masterserver.model.Platform;
-import home.masterserver.model.Region;
 import home.masterserver.model.User;
 import home.masterserver.model.UserProfile;
 import home.masterserver.other.Hasher;
@@ -27,11 +25,11 @@ public class UserController {
         String hashed = Hasher.hashPassword(password);
         if(!userService.existsPlatform(platform))
         {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         if(!userService.existsUser(login,hashed))
         {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         User user = userService.getUser(login, hashed);
         UserProfile userProfile = user.getProfile();
@@ -45,11 +43,11 @@ public class UserController {
     public ResponseEntity<String> register(@RequestParam("login") String login, @RequestParam("password") String password, @RequestParam("platform") String platform) {
         if(userService.existsUser(login))
         {
-            return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
         if(!userService.existsPlatform(platform))
         {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
         UserProfile userProfile = new UserProfile();
@@ -73,21 +71,21 @@ public class UserController {
         String hashed = Hasher.hashPassword(password);
         if(!userService.existsUser(login,hashed))
         {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         User user = userService.getUser(login,hashed);
         user.setPassword(Hasher.hashPassword(newPassword));
         userService.save(user);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
     @DeleteMapping(path = "/delete")
-    public ResponseEntity<User> deleteAccount(@RequestParam("login") String login, @RequestParam("password") String password) {
+    public ResponseEntity<Void> deleteAccount(@RequestParam("login") String login, @RequestParam("password") String password) {
         String hashed = Hasher.hashPassword(password);
         if(!userService.existsUser(login,hashed))
         {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         userService.delete(userService.getUser(login, hashed));
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
