@@ -11,7 +11,7 @@ public class Region {
     public String getName() {
         return name;
     }
-    public void setName(String region) {
+    public void setName(String name) {
         this.name = name;
     }
 }
