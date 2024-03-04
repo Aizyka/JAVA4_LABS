@@ -6,12 +6,12 @@ import jakarta.persistence.Entity;
 @Entity
 public class Platform {
     @Id
-    private String platform;
+    private String name;
 
-    public String getPlatform() {
-        return platform;
+    public String getName() {
+        return name;
     }
-    public void setPlatform(String platform) {
-        this.platform = platform;
+    public void setName(String platform) {
+        this.name = name;
     }
 }
