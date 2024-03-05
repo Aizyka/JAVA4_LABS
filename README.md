@@ -12,12 +12,16 @@ The JAVA4_LABS project is a Java-based application built on the Spring Boot fram
 
 The project is structured as follows:
 
-- **home.masterserver.config.DatabaseConfig:** Contains loading information logic about database service location, username and password.
-- **home.masterserver.controller.ServersController:** Contains mapping for HTTP requests.
-- **home.masterserver.service.DatabaseServer:** Contains main logic for retrieving information from database.
-- **home.masterserver.other.Database:** Contains database initialization.
+- **home.masterserver.controller.UserController:** Contains mapping for HTTP requests for User repository.
+- **home.masterserver.controller.UserProfileController:** Contains mapping for HTTP requests for UserProfile repository.
+- **home.masterserver.service.UserService:** Contains main logic for retrieving information from user table.
+- **home.masterserver.repository.PlatformRepository:** Contains repository for platform table.
+- **home.masterserver.repository.RegionRepository:** Contains repository for region table.
+- **home.masterserver.repository.UserProfileRepository:** Contains repository for user_profile table.
+- **home.masterserver.repository.UserRepository:** Contains repository for user table.
 - **home.masterserver.other.Database.Query:** Contains object for quering database.
 - **home.masterserver.other.Log:** Contains operation for showing messages in console.
+- **home.masterserver.other.Hasher:** Contains operation for hashing data.
 
 ## Dependencies
 
