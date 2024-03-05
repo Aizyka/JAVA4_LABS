@@ -1,5 +1,6 @@
 package home.masterserver.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import home.masterserver.model.profiles.ClassifiedSiteProfile;
 import jakarta.persistence.*;
@@ -21,7 +22,8 @@ public class UserProfile {
     private Platform loginPlatform;
     @ManyToOne
     private Platform creationPlatform;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JsonBackReference
     private Region region;
     private LocalDateTime creationDate;
     private LocalDateTime loginDate;

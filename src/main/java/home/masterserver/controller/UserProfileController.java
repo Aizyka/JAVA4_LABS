@@ -1,5 +1,6 @@
 package home.masterserver.controller;
 
+import home.masterserver.model.Region;
 import home.masterserver.model.UserProfile;
 import home.masterserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,12 @@ public class UserProfileController {
         }
         return new ResponseEntity<>(userService.getUserProfile(secret), HttpStatus.OK);
     }
+
+    @GetMapping(path = "/region")
+    public ResponseEntity<Region> getRegion(@RequestParam("region") String region) {
+        return new ResponseEntity<>(userService.getRegion(region), HttpStatus.OK);
+    }
+
     @PatchMapping(path = "/updateName")
     public ResponseEntity<UserProfile> updateName(@RequestParam("secret") String secret, @RequestParam("newName") String newName) {
         if(!userService.existUserProfile(secret))
