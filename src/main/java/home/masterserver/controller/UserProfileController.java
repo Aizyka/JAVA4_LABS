@@ -4,9 +4,12 @@ import home.masterserver.model.Region;
 import home.masterserver.model.UserProfile;
 import home.masterserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/api/profile")
@@ -30,6 +33,12 @@ public class UserProfileController {
     public ResponseEntity<Region> getRegion(@RequestParam("region") String region) {
         return new ResponseEntity<>(userService.getRegion(region), HttpStatus.OK);
     }
+
+    @GetMapping(path = "/valid")
+    public ResponseEntity<Boolean> isProfileValid(@RequestParam("id") Long id, @RequestParam("secret") String secret) {
+        return new ResponseEntity<>(userService.checkSecret(id,secret), HttpStatus.OK);
+    }
+
 
     @PatchMapping(path = "/updateName")
     public ResponseEntity<UserProfile> updateName(@RequestParam("secret") String secret, @RequestParam("newName") String newName) {

@@ -37,6 +37,7 @@ public class UserController {
         userProfile.setLoginPlatform(userService.getPlatform(platform));
         userProfile.setLoginDate(LocalDateTime.now());
         userService.save(userProfile);
+        userService.updateSecret(userProfile.getId(), userProfile.getSecret());
         return new ResponseEntity<>(userProfile.getSecret(), HttpStatus.OK);
     }
     @PostMapping(path = "/register")
@@ -64,6 +65,7 @@ public class UserController {
         user.setProfile(userProfile);
 
         userService.save(user);
+        userService.updateSecret(userProfile.getId(), userProfile.getSecret());
         return new ResponseEntity<>(userProfile.getSecret(), HttpStatus.OK);
     }
     @PatchMapping(path = "/changePassword")

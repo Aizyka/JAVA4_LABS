@@ -1,8 +1,12 @@
 package home.masterserver.service;
 
+import home.masterserver.config.SecretsCache;
 import home.masterserver.model.*;
 import home.masterserver.repository.*;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.HashMap;
 
 @Service
 public class UserService {
@@ -10,12 +14,28 @@ public class UserService {
     private final UserProfileRepository userProfileRepository;
     private final PlatformRepository platformRepository;
     private final RegionRepository regionRepository;
+    private final SecretsCache cache;
 
     public UserService(UserRepository userRepository, UserProfileRepository userProfileRepository, PlatformRepository platformRepository, RegionRepository regionRepository) {
         this.userRepository = userRepository;
         this.userProfileRepository = userProfileRepository;
         this.platformRepository = platformRepository;
         this.regionRepository = regionRepository;
+        cache = new SecretsCache();
+    }
+
+    public boolean checkSecret(Long id, String secret) {
+        if(cache.contains(id))
+            return cache.get(id).equals(secret);
+        if(!userProfileRepository.existsById(id))
+            return false;
+        String dbSecret = userProfileRepository.getSecretByID(id);
+        cache.put(id,dbSecret);
+        return dbSecret.equals(secret);
+    }
+
+    public void updateSecret(Long id, String secret) {
+        cache.put(id,secret);
     }
 
     public User getUser(String login, String password) {
