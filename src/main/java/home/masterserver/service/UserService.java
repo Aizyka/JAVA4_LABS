@@ -5,9 +5,6 @@ import home.masterserver.model.*;
 import home.masterserver.repository.*;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.HashMap;
-
 @Service
 public class UserService {
     private final UserRepository userRepository;
